@@ -197,6 +197,16 @@ begin
     TClientDataset(ds.DataSet).Params[0].AsInteger  := ds_cons.DataSet.Fields[0].AsInteger;
     ds.DataSet.Open;
 
+    ds_cons.DataSet.Close;
+
+    if Application.MessageBox(PChar('Deseja Excluir o registro selecionado?'), 'Confirmação',
+       MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION) = mrYes then
+    begin
+      ds.DataSet.Delete;
+
+      if Tclientdataset(ds.DataSet).ApplyUpdates(0)  > 0 then
+      raise FreeOnRelease
+    end;
 
   except on e:exception do
     raise Exception.Create('Erro:'+#13+e.Message);

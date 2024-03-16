@@ -21,7 +21,6 @@ object FrmPrincipal: TFrmPrincipal
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 897
   end
   object Menu: TMainMenu
     Left = 16

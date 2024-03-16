@@ -26,8 +26,7 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
     ActivePage = TabConsulta
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 712
-    ExplicitHeight = 467
+    ExplicitWidth = 731
     object TabDados: TTabSheet
       Caption = 'TabDados'
     end
@@ -42,7 +41,7 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
         Align = alTop
         Caption = 'Filtro'
         TabOrder = 0
-        ExplicitWidth = 704
+        ExplicitWidth = 723
         object Label1: TLabel
           Left = 8
           Top = 19
@@ -99,8 +98,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
     Images = IMG
     ShowCaptions = True
     TabOrder = 1
-    ExplicitTop = 467
-    ExplicitWidth = 712
+    ExplicitTop = 495
+    ExplicitWidth = 714
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
