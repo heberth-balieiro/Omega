@@ -1,0 +1,10 @@
+unit UAcaoForm;
+
+interface
+
+Type
+  TAcao = (AcNovo, AcEditar, AcExcluir, AcConsulta, AcNull);
+
+implementation
+
+end.
