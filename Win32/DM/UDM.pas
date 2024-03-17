@@ -206,8 +206,38 @@ begin
 end;
 
 Function TDm.ValidarultDoacao(id:integer):Tdate;
+var
+Qry :TsqlQuery;
 begin
 
+  try
+    Qry               := TSqlquery.Create(nil);
+    Qry.SQLConnection :=Connect;
+
+    with Qry do
+    begin
+      Close;
+      sql.Clear;
+      Sql.Add('Select max(doa_data)as dt from bs_doacao where pes_id= :id');
+      Params.ParamByName('id').AsInteger   := id;
+
+      Try
+        Open;
+        if not isempty then
+        begin
+          Result := Fields[0].AsDateTime
+        end
+        else
+          Result  := date -15;
+
+      Except on e:exception do
+        raise Exception.Create('Erro:'+#13+e.Message)
+      End;
+      close;
+    end;
+  finally
+    Qry.Free;
+  end;
 end;
 
 

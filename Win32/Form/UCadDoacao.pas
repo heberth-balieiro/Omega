@@ -43,14 +43,16 @@ uses UDM;
 procedure TFrm_CadManutencao.A_novoExecute(Sender: TObject);
 begin
   inherited;
-  dm.cds_doacaodoa_id.AsInteger := DM.Numerador('BS_DOACAO','DOA_ID');
-  dm.cds_doacaodoa_data.EditMask := '##/##/####';
+  dm.cds_doacaodoa_status.AsString  := 'C';
+  dm.cds_doacaodoa_id.AsInteger     := DM.Numerador('BS_DOACAO','DOA_ID');
+  dm.cds_doacaodoa_data.EditMask    := '##/##/####';
 end;
 
 procedure TFrm_CadManutencao.a_salvarExecute(Sender: TObject);
 var
 Idade:Integer;
 Qtdedoada:Double;
+DtultDoacao:Tdate;
 begin
   inherited;
 
@@ -60,15 +62,34 @@ begin
   if (idade > 60) then
   begin
     Showmessage('Idade da pessoa não está dentro dos limites.');
+    //edtpessoa.SetFocus;
     exit;
   end;
 
   if Qtdedoada > 1.0 then
   begin
     Showmessage('Quantidade informada doada não pode exceder a 1 litro.');
+    //edtqtde.SetFocus;
     exit;
   end;
 
+
+  DtUltDoacao   := Dm.ValidarultDoacao(dm.cds_doacaopes_id.AsInteger);
+
+  if DaysBetween(DtUltDoacao, Now) < 15 then
+  begin
+    Showmessage('Já exite uma doação recentemente.');
+    exit;
+  end;
+
+  if dm.cds_doacaodoa_data.AsDateTime > Date then
+  begin
+    Showmessage('A data da doação não pode ser data futura.');
+    //edtdata.SetFocus;
+    exit;
+  end;
+
+  salvar();
 
 end;
 

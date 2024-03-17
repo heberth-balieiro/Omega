@@ -8,7 +8,7 @@ uses
   Data.SqlExpr, Datasnap.Provider, Datasnap.DBClient, System.Actions,
   Vcl.ActnList, System.ImageList, Vcl.ImgList, cxImageList, cxGraphics,
   Vcl.ComCtrls, Vcl.ToolWin, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls,
-  Vcl.Mask, Vcl.ExtCtrls;
+  Vcl.Mask, Vcl.ExtCtrls,DateUtils;
 
 type
   TFrm_CadPessoa = class(TFrm_ModeloPadrao)
@@ -36,6 +36,7 @@ type
     procedure A_novoExecute(Sender: TObject);
     procedure edtEmailKeyPress(Sender: TObject; var Key: Char);
     procedure EdtPesquisaChange(Sender: TObject);
+    procedure a_salvarExecute(Sender: TObject);
   private
     procedure Pesquisa;
     { Private declarations }
@@ -60,6 +61,42 @@ begin
   dm.cds_pessoapes_cpf.EditMask := '###.###.###-##';
   dm.cds_pessoapes_celular.EditMask := '(##)#####-####';
   dm.cds_pessoapes_datanasc.EditMask := '##/##/####';
+end;
+
+procedure TFrm_CadPessoa.a_salvarExecute(Sender: TObject);
+var
+Nome:string;
+nasc:TDateTime;
+Idade:integer;
+begin
+  inherited;
+
+      nome    := dm.cds_pessoapes_nome.AsString;
+      nasc    := dm.cds_pessoapes_datanasc.AsDateTime;
+
+      if Length(nome) <=5 then
+      begin
+        Showmessage('O Campo nome deve conter mais de 5 caracteres.');
+        exit;
+      end;
+
+      if dm.ValidarPessoa(nome,
+                          nasc
+                          ) then
+      begin
+        showmessage('Pessoa já cadastrado no sistema.');
+        exit;
+      end;
+
+      idade := YearsBetween(Date, nasc);
+
+      if (idade < 18) or (idade > 60) then
+      begin
+        Showmessage('Idade da pessoa não está dentro dos limites.');
+        exit;
+      end;
+
+      salvar();
 end;
 
 procedure TFrm_CadPessoa.edtEmailKeyPress(Sender: TObject; var Key: Char);

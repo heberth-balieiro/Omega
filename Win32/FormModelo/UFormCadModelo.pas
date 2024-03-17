@@ -133,7 +133,7 @@ end;
 
 procedure TFrm_ModeloPadrao.a_salvarExecute(Sender: TObject);
 begin
-  self.salvar();
+  //self.salvar();
 end;
 
 procedure TFrm_ModeloPadrao.a_salvarUpdate(Sender: TObject);
@@ -180,7 +180,6 @@ begin
       TDBgrid(Components[I]).ReadOnly  := True;
   end;
 end;
-
 
 procedure TFrm_ModeloPadrao.CamposObrigatorios;
 var
@@ -374,41 +373,12 @@ begin
 end;
 
 procedure TFrm_ModeloPadrao.Salvar;
-var
-Nome:string;
-nasc:TDateTime;
-Idade:integer;
+
 begin
   Try
     if FAcao <> UAcaoForm.AcConsulta then
     begin
       CamposObrigatorios();
-
-
-      nome    := TClientDataSet(ds.DataSet).FieldByName('pes_nome').AsString;
-      nasc    := TClientDataSet(ds.DataSet).FieldByName('pes_datanasc').AsDateTime;
-
-      if Length(nome) <=5 then
-      begin
-        Showmessage('O Campo nome deve conter mais de 5 caracteres.');
-        exit;
-      end;
-
-      if dm.ValidarPessoa(TClientDataSet(ds.DataSet).FieldByName('pes_nome').AsString,
-                TClientDataSet(ds.DataSet).FieldByName('pes_datanasc').AsDateTime
-                ) then
-      begin
-        showmessage('Pessoa já cadastrado no sistema.');
-        exit;
-      end;
-
-      idade := YearsBetween(Date, nasc);
-
-      if (idade < 18) or (idade > 60) then
-      begin
-        Showmessage('Idade da pessoa não está dentro dos limites.');
-        exit;
-      end;
 
       TClientdataset(ds.DataSet).post;
 
