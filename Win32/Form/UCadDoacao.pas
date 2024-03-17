@@ -81,7 +81,7 @@ begin
   end;
 
   editar();
-  Pesquisa;
+
 end;
 
 procedure TFrm_CadManutencao.a_excluirExecute(Sender: TObject);
@@ -107,6 +107,8 @@ end;
 procedure TFrm_CadManutencao.A_novoExecute(Sender: TObject);
 begin
   inherited;
+  ds_cons.DataSet.Close;
+  page.ActivePage   := tabdados;
   dm.cds_doacaodoa_status.AsString  := 'C';
   dm.cds_doacaodoa_id.AsInteger     := DM.Numerador('BS_DOACAO','DOA_ID');
   dm.cds_doacaodoa_data.EditMask    := '##/##/####';
@@ -134,6 +136,13 @@ begin
   if Qtdedoada > 1.0 then
   begin
     Showmessage('Quantidade informada doada não pode exceder a 1 litro.');
+    edtqtde.SetFocus;
+    exit;
+  end;
+
+  if qtdedoada = 0 then
+  begin
+    Showmessage('Quantidade informada não pode ser zero.');
     edtqtde.SetFocus;
     exit;
   end;

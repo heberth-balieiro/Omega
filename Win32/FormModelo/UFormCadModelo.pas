@@ -21,7 +21,6 @@ type
     A_novo: TAction;
     A_editar: TAction;
     a_excluir: TAction;
-    a_consulta: TAction;
     a_cancelar: TAction;
     a_salvar: TAction;
     a_fechar: TAction;
@@ -31,7 +30,6 @@ type
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton9: TToolButton;
-    ToolButton1: TToolButton;
     ToolButton10: TToolButton;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
@@ -57,7 +55,6 @@ type
     procedure A_editarExecute(Sender: TObject);
     procedure A_novoExecute(Sender: TObject);
     procedure a_excluirExecute(Sender: TObject);
-    procedure a_consultaExecute(Sender: TObject);
     procedure a_cancelarExecute(Sender: TObject);
     procedure a_salvarExecute(Sender: TObject);
     procedure a_fecharExecute(Sender: TObject);
@@ -69,7 +66,6 @@ type
   private
     procedure CamposObrigatorios;
 
-
   Protected
     FAcao         : TAcaoForm;
     FRegistro     : TBookmark;
@@ -78,7 +74,6 @@ type
     Procedure Editar; Virtual;
     Procedure Novo; Virtual;
     Procedure Excluir; virtual;
-    Procedure Consultar; virtual;
     Procedure Cancelar; virtual;
 
     Procedure Salvar; virtual;
@@ -100,11 +95,6 @@ uses UDM;
 procedure TFrm_ModeloPadrao.a_cancelarExecute(Sender: TObject);
 begin
   self.Cancelar();
-end;
-
-procedure TFrm_ModeloPadrao.a_consultaExecute(Sender: TObject);
-begin
-  self.Consultar();
 end;
 
 procedure TFrm_ModeloPadrao.A_editarExecute(Sender: TObject);
@@ -212,15 +202,6 @@ begin
   self.EdtPesquisa.Clear();
   self.EdtPesquisa.SetFocus;
 
-end;
-
-
-procedure TFrm_ModeloPadrao.Consultar;
-begin
-  if page.ActivePage = Tabconsulta then
-  page.ActivePage := TabDados
-  else
-  page.ActivePage := Tabconsulta;
 end;
 
 procedure TFrm_ModeloPadrao.Editar;
@@ -357,9 +338,6 @@ begin
     end;
 
     ds.DataSet.Append();
-
-    page.ActivePage     := tabdados;
-
 
     if assigned(self.FComponente) then
     self.FComponente.SetFocus();

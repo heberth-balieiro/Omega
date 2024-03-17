@@ -61,14 +61,12 @@ begin
   inherited;
 
   Editar();
-  Pesquisa;
+
 end;
 
 procedure TFrm_CadPessoa.a_excluirExecute(Sender: TObject);
 begin
   inherited;
-
-
   excluir();
   Pesquisa;
 end;
@@ -76,7 +74,8 @@ end;
 procedure TFrm_CadPessoa.A_novoExecute(Sender: TObject);
 begin
   inherited;
-
+  ds_cons.DataSet.Close;
+  page.ActivePage     := tabdados;
   dm.cds_pessoapes_id.AsInteger := DM.Numerador('BS_PESSOA','PES_ID');
   dm.cds_pessoapes_cpf.EditMask := '###.###.###-##';
   dm.cds_pessoapes_celular.EditMask := '(##)#####-####';
@@ -91,7 +90,7 @@ Idade:integer;
 begin
   inherited;
 
-      nome    := dm.cds_pessoapes_nome.AsString;
+      nome    := Trim(edtnome.Text);
 
 
       if Length(nome) <=5 then
@@ -102,7 +101,7 @@ begin
 
       if dm.cds_pessoa.State in [dsInsert] then
       begin
-
+        nasc    := dm.cds_pessoapes_datanasc.AsDateTime;
         if dm.ValidarPessoa(nome,
                             nasc
                             ) then
@@ -111,7 +110,7 @@ begin
           exit;
         end;
 
-        nasc    := dm.cds_pessoapes_datanasc.AsDateTime;
+
         idade := YearsBetween(Date, nasc);
 
         if (idade < 18) or (idade > 60) then
@@ -141,6 +140,8 @@ end;
 procedure TFrm_CadPessoa.FormShow(Sender: TObject);
 begin
   inherited;
+  ToolButton11.Visible  := False;
+  ToolButton9.Visible := False;
   pesquisa;
 end;
 

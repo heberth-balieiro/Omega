@@ -4,8 +4,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Formulario Padr'#227'o'
-  ClientHeight = 523
-  ClientWidth = 712
+  ClientHeight = 535
+  ClientWidth = 720
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,23 +22,23 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   object Page: TPageControl
     Left = 0
     Top = 0
-    Width = 712
-    Height = 467
+    Width = 720
+    Height = 479
     ActivePage = TabConsulta
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 712
+    ExplicitHeight = 467
     object TabDados: TTabSheet
       Caption = 'TabDados'
       TabVisible = False
       object GroupBoxdados: TGroupBox
         Left = 0
         Top = 0
-        Width = 708
-        Height = 458
+        Width = 712
+        Height = 469
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 704
-        ExplicitHeight = 457
       end
     end
     object TabConsulta: TTabSheet
@@ -48,11 +48,12 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       object Group_filtro: TGroupBox
         Left = 0
         Top = 0
-        Width = 704
+        Width = 712
         Height = 73
         Align = alTop
         Caption = 'Filtro'
         TabOrder = 0
+        ExplicitWidth = 704
         object Label1: TLabel
           Left = 8
           Top = 19
@@ -86,8 +87,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       object DBGrid: TDBGrid
         Left = 0
         Top = 73
-        Width = 704
-        Height = 384
+        Width = 712
+        Height = 396
         Align = alClient
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgTitleClick, dgTitleHotTrack]
         ReadOnly = True
@@ -102,8 +103,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   end
   object ToolBar1: TToolBar
     Left = 0
-    Top = 467
-    Width = 712
+    Top = 479
+    Width = 720
     Height = 56
     Align = alBottom
     ButtonHeight = 56
@@ -112,6 +113,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
     Images = IMG
     ShowCaptions = True
     TabOrder = 1
+    ExplicitTop = 467
+    ExplicitWidth = 712
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
@@ -141,29 +144,22 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       Action = a_excluir
       AutoSize = True
     end
-    object ToolButton11: TToolButton
-      Left = 219
-      Top = 0
-      Cursor = crHandPoint
-      Action = A_anular
-    end
     object ToolButton9: TToolButton
-      Left = 301
+      Left = 219
       Top = 0
       Width = 8
       Caption = 'ToolButton9'
       ImageIndex = 8
       Style = tbsSeparator
     end
-    object ToolButton1: TToolButton
-      Left = 309
+    object ToolButton11: TToolButton
+      Left = 227
       Top = 0
       Cursor = crHandPoint
-      Action = a_consulta
-      AutoSize = True
+      Action = A_anular
     end
     object ToolButton10: TToolButton
-      Left = 395
+      Left = 309
       Top = 0
       Width = 8
       Caption = 'ToolButton10'
@@ -171,21 +167,21 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       Style = tbsSeparator
     end
     object ToolButton5: TToolButton
-      Left = 403
+      Left = 317
       Top = 0
       Cursor = crHandPoint
       Action = a_cancelar
       AutoSize = True
     end
     object ToolButton6: TToolButton
-      Left = 489
+      Left = 403
       Top = 0
       Cursor = crHandPoint
       Action = a_salvar
       AutoSize = True
     end
     object ToolButton7: TToolButton
-      Left = 567
+      Left = 481
       Top = 0
       Cursor = crHandPoint
       Action = a_fechar
@@ -1406,14 +1402,6 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       ImageIndex = 5
       ShortCut = 115
       OnExecute = a_excluirExecute
-      OnUpdate = A_novoUpdate
-    end
-    object a_consulta: TAction
-      Category = 'Menu'
-      Caption = 'Consulta (F6)'
-      ImageIndex = 6
-      ShortCut = 117
-      OnExecute = a_consultaExecute
       OnUpdate = A_novoUpdate
     end
     object a_cancelar: TAction

@@ -1,23 +1,23 @@
 inherited Frm_CadPessoa: TFrm_CadPessoa
   Caption = 'Cadastro de Pessoa'
-  ClientHeight = 462
-  ClientWidth = 688
-  ExplicitWidth = 696
-  ExplicitHeight = 489
+  ClientHeight = 450
+  ClientWidth = 680
+  ExplicitWidth = 688
+  ExplicitHeight = 477
   TextHeight = 17
   inherited Page: TPageControl
-    Width = 688
-    Height = 406
-    ExplicitWidth = 680
-    ExplicitHeight = 394
+    Width = 680
+    Height = 394
+    ExplicitWidth = 672
+    ExplicitHeight = 382
     inherited TabDados: TTabSheet
-      ExplicitWidth = 680
-      ExplicitHeight = 396
+      ExplicitWidth = 672
+      ExplicitHeight = 384
       inherited GroupBoxdados: TGroupBox
-        Width = 680
-        Height = 396
-        ExplicitWidth = 680
-        ExplicitHeight = 396
+        Width = 672
+        Height = 384
+        ExplicitWidth = 672
+        ExplicitHeight = 384
         object Label3: TLabel
           Left = 16
           Top = 16
@@ -149,11 +149,11 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
       end
     end
     inherited TabConsulta: TTabSheet
-      ExplicitWidth = 680
-      ExplicitHeight = 396
+      ExplicitWidth = 672
+      ExplicitHeight = 384
       inherited Group_filtro: TGroupBox
-        Width = 680
-        ExplicitWidth = 672
+        Width = 672
+        ExplicitWidth = 664
         inherited EdtFiltro: TComboBox
           BevelInner = bvNone
           Style = csDropDownList
@@ -173,8 +173,8 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
         end
       end
       inherited DBGrid: TDBGrid
-        Width = 680
-        Height = 323
+        Width = 672
+        Height = 311
         DataSource = ds_cons
         Columns = <
           item
@@ -215,35 +215,10 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
     end
   end
   inherited ToolBar1: TToolBar
-    Top = 406
-    Width = 688
-    ExplicitTop = 394
-    ExplicitWidth = 680
-    inherited ToolButton2: TToolButton
-      ExplicitWidth = 68
-    end
-    inherited ToolButton3: TToolButton
-      ExplicitWidth = 70
-    end
-    inherited ToolButton4: TToolButton
-      ExplicitWidth = 73
-    end
-    inherited ToolButton11: TToolButton
-      ImageIndex = 8
-      Visible = False
-    end
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 86
-    end
-    inherited ToolButton5: TToolButton
-      ExplicitWidth = 86
-    end
-    inherited ToolButton6: TToolButton
-      ExplicitWidth = 78
-    end
-    inherited ToolButton7: TToolButton
-      ExplicitWidth = 80
-    end
+    Top = 394
+    Width = 680
+    ExplicitTop = 382
+    ExplicitWidth = 672
   end
   inherited IMG: TcxImageList
     FormatVersion = 1

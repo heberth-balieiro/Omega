@@ -1,17 +1,9 @@
 inherited Frm_CadManutencao: TFrm_CadManutencao
   Caption = 'Manuten'#231#227'o'
-  ExplicitWidth = 720
-  ExplicitHeight = 550
   TextHeight = 17
   inherited Page: TPageControl
-    ExplicitWidth = 704
-    ExplicitHeight = 455
     inherited TabDados: TTabSheet
       inherited GroupBoxdados: TGroupBox
-        Width = 704
-        Height = 457
-        ExplicitWidth = 696
-        ExplicitHeight = 445
         object Label3: TLabel
           Left = 16
           Top = 16
@@ -151,31 +143,6 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
             Visible = True
           end>
       end
-    end
-  end
-  inherited ToolBar1: TToolBar
-    ExplicitTop = 455
-    ExplicitWidth = 704
-    inherited ToolButton2: TToolButton
-      ExplicitWidth = 68
-    end
-    inherited ToolButton3: TToolButton
-      ExplicitWidth = 70
-    end
-    inherited ToolButton4: TToolButton
-      ExplicitWidth = 73
-    end
-    inherited ToolButton1: TToolButton
-      ExplicitWidth = 86
-    end
-    inherited ToolButton5: TToolButton
-      ExplicitWidth = 86
-    end
-    inherited ToolButton6: TToolButton
-      ExplicitWidth = 78
-    end
-    inherited ToolButton7: TToolButton
-      ExplicitWidth = 80
     end
   end
   inherited IMG: TcxImageList
