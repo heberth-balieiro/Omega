@@ -39,6 +39,7 @@ type
     procedure a_salvarExecute(Sender: TObject);
     procedure a_excluirExecute(Sender: TObject);
     procedure A_editarExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     procedure Pesquisa;
     { Private declarations }
@@ -135,6 +136,12 @@ procedure TFrm_CadPessoa.EdtPesquisaChange(Sender: TObject);
 begin
   inherited;
   Pesquisa;
+end;
+
+procedure TFrm_CadPessoa.FormShow(Sender: TObject);
+begin
+  inherited;
+  pesquisa;
 end;
 
 Procedure TFrm_CadPessoa.Pesquisa;

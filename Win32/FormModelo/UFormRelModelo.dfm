@@ -30,6 +30,8 @@ object Frm_RelModeloPadrao: TFrm_RelModeloPadrao
     Images = IMG
     ShowCaptions = True
     TabOrder = 0
+    ExplicitTop = 283
+    ExplicitWidth = 428
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
@@ -61,10 +63,8 @@ object Frm_RelModeloPadrao: TFrm_RelModeloPadrao
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 72
-    ExplicitTop = 64
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 428
+    ExplicitHeight = 283
   end
   object IMG: TcxImageList
     SourceDPI = 96
@@ -357,27 +357,6 @@ object Frm_RelModeloPadrao: TFrm_RelModeloPadrao
       ImageIndex = 1
       OnExecute = a_fecharExecute
     end
-  end
-  object Relatorio: TfrxReport
-    Version = '2022.1.3'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Padr'#227'o'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45368.347918599540000000
-    ReportOptions.LastChange = 45368.347918599540000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      'begin'
-      ''
-      'end.')
-    Left = 288
-    Top = 200
-    Datasets = <>
-    Variables = <>
-    Style = <>
   end
   object frxRelatorio: TfrxDBDataset
     UserName = 'frxRelatorio'

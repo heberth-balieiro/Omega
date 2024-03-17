@@ -26,7 +26,7 @@ object DM: TDM
       'LibraryName=dbxmss.dll'
       'VendorLib=sqlncli10.dll'
       'VendorLibWin64=sqlncli10.dll'
-      'HostName=localhost\sqlexpress'
+      'HostName='
       'DataBase=dados'
       'MaxBlobSize=-1'
       'LocaleCode=0000'
@@ -34,17 +34,15 @@ object DM: TDM
       'OSAuthentication=False'
       'PrepareSQL=True'
       'User_Name=sa'
-      'Password=hd860412'
+      'Password='
       'BlobSize=-1'
       'ErrorResourceFile='
       'OS Authentication=False'
       'Prepare SQL=False')
-    Connected = True
     Left = 24
-    Top = 48
+    Top = 64
   end
   object cds_pessoa: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <
       item
@@ -179,7 +177,7 @@ object DM: TDM
     Aggregates = <>
     Params = <>
     ProviderName = 'dsp_listPessoa'
-    Left = 560
+    Left = 576
     object IntegerField1: TIntegerField
       FieldName = 'PES_ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -249,6 +247,7 @@ object DM: TDM
   end
   object dsp_RelDoacao: TDataSetProvider
     DataSet = sds_RelDoacao
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 216
     Top = 192
   end
@@ -258,7 +257,8 @@ object DM: TDM
       'Select '#13#10'    '#9'SUM(bd.DOA_QTDE) as quantidade, '#13#10'    '#9'BP.PES_TIPO' +
       'SANG    '#9#13#10'    from '#13#10'    '#9'BS_DOACAO BD'#13#10'    join '#13#10'    '#9'BS_PESS' +
       'OA BP'#13#10'    on bd.PES_ID = BP.PES_ID'#13#10'    Group by '#13#10'    '#9'bp.PES_' +
-      'TIPOSANG '#13#10'    order by '#13#10'    '#9'SUM(BD.doa_qtde) DESC'
+      'TIPOSANG '#13#10'    order by '#13#10'    '#9'SUM(BD.doa_qtde) DESC'#13#10'    /*wher' +
+      'e*/'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = Connect

@@ -20,7 +20,6 @@ type
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
     Panel: TPanel;
-    Relatorio: TfrxReport;
     frxRelatorio: TfrxDBDataset;
     ds: TDataSource;
     frxPDF: TfrxPDFExport;

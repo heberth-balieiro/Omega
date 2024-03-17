@@ -42,21 +42,16 @@ var
   PInicial: Integer;
   PFinal: Integer;
 begin
-
   Acao := raAbort;
   FMensagemErroApplyUpdate := Mensage;
-
   if Pos('PRIMARY OR UNIQUE KEY', UpperCase(Mensage)) > 0 then
   begin
     PInicial := Pos('PK_', UpperCase(Mensage));
-
     if (PInicial = 0) then
     begin
       PInicial := Pos('UNQ_', UpperCase(Mensage));
     end;
-
     PFinal := Pos('ON TABLE', UpperCase(Mensage)) - 2;
-
     FMensagemErroApplyUpdate := 'Violação de chave primária. ' +
       Copy(Mensage, PInicial, (PFinal - PInicial));
   end
@@ -65,7 +60,6 @@ begin
   begin
     PInicial := Pos('FK_', UpperCase(Mensage));
     PFinal := Pos('ON TABLE', UpperCase(Mensage)) - 2;
-
     FMensagemErroApplyUpdate := 'Violação de chave estrangeira. ' +
       Copy(Mensage, PInicial, (PFinal - PInicial));
   end;

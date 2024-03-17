@@ -142,7 +142,6 @@
         <DCCReference Include="..\Win32\Units\UAcaoForm.pas"/>
         <DCCReference Include="..\Win32\Units\UException.pas"/>
         <DCCReference Include="..\Win32\Units\UTratarError.pas"/>
-        <DCCReference Include="..\Win32\Units\UFuncaoSql.pas"/>
         <DCCReference Include="..\Win32\Form\UConfigbanco.pas">
             <Form>Frm_Configbanco</Form>
             <FormType>dfm</FormType>

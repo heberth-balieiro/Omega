@@ -185,7 +185,7 @@ begin
   inherited;
   dspessoa.DataSet.Close;
   dspessoa.DataSet.Open;
-
+  Pesquisa;
 
 end;
 

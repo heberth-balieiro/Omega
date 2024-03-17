@@ -219,9 +219,30 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
     Width = 688
     ExplicitTop = 394
     ExplicitWidth = 680
+    inherited ToolButton2: TToolButton
+      ExplicitWidth = 68
+    end
+    inherited ToolButton3: TToolButton
+      ExplicitWidth = 70
+    end
+    inherited ToolButton4: TToolButton
+      ExplicitWidth = 73
+    end
     inherited ToolButton11: TToolButton
       ImageIndex = 8
       Visible = False
+    end
+    inherited ToolButton1: TToolButton
+      ExplicitWidth = 86
+    end
+    inherited ToolButton5: TToolButton
+      ExplicitWidth = 86
+    end
+    inherited ToolButton6: TToolButton
+      ExplicitWidth = 78
+    end
+    inherited ToolButton7: TToolButton
+      ExplicitWidth = 80
     end
   end
   inherited IMG: TcxImageList

@@ -16,9 +16,9 @@ object FrmPrincipal: TFrmPrincipal
   TextHeight = 15
   object IMG: TImage
     Left = 0
-    Top = 70
+    Top = 0
     Width = 901
-    Height = 523
+    Height = 593
     Align = alClient
     Enabled = False
     Picture.Data = {
@@ -8318,16 +8318,6 @@ object FrmPrincipal: TFrmPrincipal
     ExplicitTop = 216
     ExplicitWidth = 105
     ExplicitHeight = 105
-  end
-  object Panel1: TPanel
-    Left = 0
-    Top = 0
-    Width = 901
-    Height = 70
-    Align = alTop
-    BevelOuter = bvNone
-    TabOrder = 0
-    ExplicitWidth = 897
   end
   object BarSistema: TStatusBar
     Left = 0

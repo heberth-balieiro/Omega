@@ -10,7 +10,6 @@ uses
   Vcl.ImgList, cxImageList, cxGraphics,
   UAcaoForm,
   UException,
-  UFuncaoSql,
   uTratarerror,
   Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls,DateUtils;
 

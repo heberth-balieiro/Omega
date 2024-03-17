@@ -90,8 +90,9 @@ begin
     dm.GravarValorIni(dm.nDir+'\Banco.ini','Conexao', 'HostName', Trim(edtserver.Text));
     dm.GravarValorIni(dm.nDir+'\Banco.ini','Conexao', 'DataBase', Trim(edtbase.Text));
     dm.GravarValorIni(dm.nDir+'\Banco.ini','Conexao', 'User', Trim(edtusuario.Text));
-    dm.GravarValorIni(dm.nDir+'\Banco.ini','Conexao', 'Password', Trim(edtsenha.Text));
-
+    dm.GravarValorIni(dm.nDir+'\Banco.ini','Conexao', 'Password', dm.crypt('C', edtsenha.Text));
+    dm.CarregarConexao;
+    dm.ConfigBanco(dm.Connect);
     Close;
 
   Except on e:exception do
@@ -105,7 +106,7 @@ begin
     edtserver.Text      := dm.LerValorIni(dm.nDir+'\Banco.ini','Conexao','HostName','');
     edtBase.Text        := dm.LerValorIni(dm.nDir+'\Banco.ini','Conexao','DataBase','');
     edtusuario.Text     := dm.LerValorIni(dm.nDir+'\Banco.ini','Conexao','User','');
-    edtSenha.Text       := dm.LerValorIni(dm.nDir+'\Banco.ini','Conexao','Password','');
+    edtSenha.Text       := dm.crypt('D', dm.LerValorIni(dm.nDir+'\Banco.ini','Conexao','Password',''));
   Except on e:exception do
     raise Exception.Create('Error:'+#13+e.Message);
   End;

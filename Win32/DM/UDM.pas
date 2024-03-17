@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, Data.DBXMSSQL, Data.DB, Data.SqlExpr,
   System.IniFiles, Data.DBXOdbc, Data.FMTBcd, Datasnap.Provider,
-  Datasnap.DBClient;
+  Datasnap.DBClient, Forms;
 
 type
   TDM = class(TDataModule)
@@ -52,6 +52,8 @@ type
     Fuser: string;
     Fhostname: string;
 
+
+
     { Private declarations }
   public
     nDir:string;
@@ -59,8 +61,8 @@ type
     function LerValorIni(const ArquivoIni, Seccao, Chave,
       ValorPadrao: string): string;
     procedure GravarValorIni(const ArquivoIni, Seccao, Chave, Valor: string);
-    Procedure ConfigBanco(Connection:Tsqlconnection);
-
+    Function ConfigBanco(Connection:Tsqlconnection):Boolean;
+    procedure CarregarConexao;
     Property Drivername :String read  FDrivername write Fdrivername;
     property Hostname   :string read  Fhostname   write Fhostname;
     property Database   :String read  fdatabase   write Fdatabase;
@@ -70,6 +72,7 @@ type
     function ValidarPessoa(S:string;dt:tdate): Boolean;
     function ValidarultDoacao(id: integer): Tdate;
     function AnularDoacao(i: integer): boolean;
+    function Crypt(Action, Src: String): String;
   end;
 
 var
@@ -78,11 +81,80 @@ var
 implementation
 
 uses
-  Vcl.Dialogs;
+  Vcl.Dialogs, UConfigbanco;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+function TDM.Crypt(Action, Src: String): String;
+Label Fim;
+var
+  KeyLen: Integer;
+  KeyPos: Integer;
+  OffSet: Integer;
+  Dest, Key, KeyNew: String;
+  SrcPos: Integer;
+  SrcAsc: Integer;
+  TmpSrcAsc: Integer;
+  Range: Integer;
+begin
+  if (Src = '') Then
+  begin
+    Result := '';
+    Goto Fim;
+  end;
+  Key := 'XNGREXCPAJHKQWERYTUIOP98756LKJHASFGMNBVCAXZ13450';
+  KeyNew := 'PRODOXCPAJHKQWERYTUIOP98765LKJHASFGMNBVCAXZ01234';
+  Dest := '';
+  KeyLen := Length(Key);
+  KeyPos := 0;
+  SrcPos := 0;
+  SrcAsc := 0;
+  Range := 128;
+  if (Action = UpperCase('C')) then
+  begin
+
+    OffSet := Range;
+    Dest := Format('%1.2x', [OffSet]);
+    for SrcPos := 1 to Length(Src) do
+    begin
+      Application.ProcessMessages;
+      SrcAsc := (Ord(Src[SrcPos]) + OffSet) Mod 255;
+      if KeyPos < KeyLen then
+        KeyPos := KeyPos + 1
+      else
+        KeyPos := 1;
+      SrcAsc := SrcAsc Xor Ord(Key[KeyPos]);
+      Dest := Dest + Format('%1.2x', [SrcAsc]);
+      OffSet := SrcAsc;
+    end;
+  end
+  Else if (Action = UpperCase('D')) then
+  begin
+    OffSet := StrToInt('$' + copy(Src, 1, 2));
+    // <--------------- adiciona o $ entra as aspas simples
+    SrcPos := 3;
+    repeat
+      SrcAsc := StrToInt('$' + copy(Src, SrcPos, 2));
+      // <--------------- adiciona o $ entra as aspas simples
+      if (KeyPos < KeyLen) Then
+        KeyPos := KeyPos + 1
+      else
+        KeyPos := 1;
+      TmpSrcAsc := SrcAsc Xor Ord(Key[KeyPos]);
+      if TmpSrcAsc <= OffSet then
+        TmpSrcAsc := 255 + TmpSrcAsc - OffSet
+      else
+        TmpSrcAsc := TmpSrcAsc - OffSet;
+      Dest := Dest + Chr(TmpSrcAsc);
+      OffSet := SrcAsc;
+      SrcPos := SrcPos + 2;
+    until (SrcPos >= Length(Src));
+  end;
+  Result := Dest;
+Fim:
+end;
 
 Function TDM.Numerador(Tabela, Campo: String): Integer;
 var
@@ -114,19 +186,29 @@ begin
 
 end;
 
-procedure TDM.ConfigBanco(Connection: Tsqlconnection);
+Function TDM.ConfigBanco(Connection: Tsqlconnection):Boolean;
 begin
+  Result  := False;
   Try
 
     Connect.DriverName                  := 'MSSQL';
     Connect.Params.Values['HostName']   := Trim(hostname);
     Connect.Params.Values['Database']   := Trim(database);
     Connect.Params.Values['User_Name']  := Trim(user);
-    Connect.Params.Values['Password']   := Trim(pass);
+    Connect.Params.Values['Password']   := crypt('D', Pass);
     Connect.Connected := True;
-
+    Result  := True;
   Except on e:Exception do
-    raise Exception.Create('Error de conexão:'+#13+e.Message);
+    begin
+      showmessage('Error de conexão com o banco de dados:'+#13+e.Message);
+
+      Frm_Configbanco := TFrm_Configbanco.Create(Application);
+      Try
+        Frm_Configbanco.showmodal;
+      Finally
+        Frm_Configbanco.release;
+      End;
+    end;
   End;
 
 end;
@@ -156,21 +238,26 @@ begin
   end;
 end;
 
-procedure TDM.DataModuleCreate(Sender: TObject);
+Procedure TDm.CarregarConexao;
 begin
-  nDir              := ExtractFilePath(ParamStr(0));
-  Try
+    nDir              := ExtractFilePath(ParamStr(0));
+
     Drivername      := LerValorIni(nDir+'\Banco.ini', 'Conexao', 'DriverName', '');
     Hostname        := LerValorIni(nDir+'\Banco.ini', 'Conexao', 'HostName', '');
     Database        := LerValorIni(nDir+'\Banco.ini', 'Conexao', 'DataBase', '');
     user            := LerValorIni(nDir+'\Banco.ini', 'Conexao', 'User', '');
     pass            := LerValorIni(nDir+'\Banco.ini', 'Conexao', 'Password', '');
+end;
 
-    ConfigBanco(Connect);
+procedure TDM.DataModuleCreate(Sender: TObject);
+begin
 
-  except on e:exception do
-    raise Exception.Create('Error:'+#13+e.Message);
-  End;
+    CarregarConexao;
+    Try
+     ConfigBanco(Connect);
+    except on e:exception do
+      raise Exception.Create('Error:'+#13+e.Message);
+    End;
 
 end;
 

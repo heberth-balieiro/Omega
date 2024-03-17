@@ -18,7 +18,6 @@ type
     mnDoacao: TMenuItem;
     mnRelatorio: TMenuItem;
     mnRelDoacao: TMenuItem;
-    Panel1: TPanel;
     Acao: TActionList;
     ActSair: TAction;
     ActPessoa: TAction;
