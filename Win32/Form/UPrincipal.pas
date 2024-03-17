@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
-  Vcl.ExtCtrls, Vcl.Menus;
+  Vcl.ExtCtrls, Vcl.Menus, Vcl.Imaging.pngimage, Vcl.ComCtrls;
 
 type
   TFrmPrincipal = class(TForm)
@@ -24,9 +24,12 @@ type
     ActPessoa: TAction;
     ActDoacao: TAction;
     ActRelDoacao: TAction;
+    IMG: TImage;
+    BarSistema: TStatusBar;
     procedure ActSairExecute(Sender: TObject);
     procedure ActPessoaExecute(Sender: TObject);
     procedure ActDoacaoExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,7 +67,20 @@ end;
 
 procedure TFrmPrincipal.ActSairExecute(Sender: TObject);
 begin
-  Close;
+  if Application.MessageBox(PChar('Deseja sair do Sistema?'), 'Confirmação',
+    MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION) = mrYes then
+  begin
+    Application.Terminate;
+  end
+  else
+  Abort;
+end;
+
+procedure TFrmPrincipal.FormShow(Sender: TObject);
+begin
+  barsistema.Panels[0].Text   := 'Versão: 1.0.0.0';
+  barsistema.Panels[1].Text   := 'Banco de Sangue';
+
 end;
 
 end.

@@ -108,12 +108,12 @@ end;
 
 procedure TFrm_ModeloPadrao.A_editarExecute(Sender: TObject);
 begin
-  self.editar();
+  //
 end;
 
 procedure TFrm_ModeloPadrao.a_excluirExecute(Sender: TObject);
 begin
- self.Excluir();
+ //
 end;
 
 procedure TFrm_ModeloPadrao.a_fecharExecute(Sender: TObject);
@@ -133,7 +133,7 @@ end;
 
 procedure TFrm_ModeloPadrao.a_salvarExecute(Sender: TObject);
 begin
-  //self.salvar();
+  //
 end;
 
 procedure TFrm_ModeloPadrao.a_salvarUpdate(Sender: TObject);

@@ -37,6 +37,8 @@ type
     procedure edtEmailKeyPress(Sender: TObject; var Key: Char);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure a_salvarExecute(Sender: TObject);
+    procedure a_excluirExecute(Sender: TObject);
+    procedure A_editarExecute(Sender: TObject);
   private
     procedure Pesquisa;
     { Private declarations }
@@ -52,6 +54,23 @@ implementation
 {$R *.dfm}
 
 uses UDM, System.SysUtils;
+
+procedure TFrm_CadPessoa.A_editarExecute(Sender: TObject);
+begin
+  inherited;
+
+  Editar();
+  Pesquisa;
+end;
+
+procedure TFrm_CadPessoa.a_excluirExecute(Sender: TObject);
+begin
+  inherited;
+
+
+  excluir();
+  Pesquisa;
+end;
 
 procedure TFrm_CadPessoa.A_novoExecute(Sender: TObject);
 begin
@@ -97,6 +116,7 @@ begin
       end;
 
       salvar();
+      Pesquisa;
 end;
 
 procedure TFrm_CadPessoa.edtEmailKeyPress(Sender: TObject; var Key: Char);

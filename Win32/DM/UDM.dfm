@@ -39,7 +39,6 @@ object DM: TDM
       'ErrorResourceFile='
       'OS Authentication=False'
       'Prepare SQL=False')
-    Connected = True
     Left = 24
     Top = 48
   end

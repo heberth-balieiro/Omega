@@ -47,9 +47,6 @@ type
     Fuser: string;
     Fhostname: string;
 
-
-
-
     { Private declarations }
   public
     nDir:string;
@@ -67,6 +64,7 @@ type
     function Numerador(Tabela, Campo: String): Integer;
     function ValidarPessoa(S:string;dt:tdate): Boolean;
     function ValidarultDoacao(id: integer): Tdate;
+    function AnularDoacao(i: integer): boolean;
   end;
 
 var
@@ -240,6 +238,34 @@ begin
   end;
 end;
 
+Function TDm.AnularDoacao(i:integer):boolean;
+var
+Qry :TsqlQuery;
+begin
+  Result  := False;
+  try
+    Qry               := TSqlquery.Create(nil);
+    Qry.SQLConnection :=Connect;
 
+    with Qry do
+    begin
+      Close;
+      sql.Clear;
+      Sql.Add('Update bs_doacao set doa_status=''A'' where doa_id= :id');
+      Params.ParamByName('id').AsInteger   := i;
+
+      Try
+        ExecSql;
+        Result  := True;
+
+      Except on e:exception do
+        raise Exception.Create('Erro:'+#13+e.Message)
+      End;
+      close;
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
 
 end.

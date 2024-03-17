@@ -8,7 +8,6 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
   inherited Page: TPageControl
     Width = 688
     Height = 406
-    ActivePage = TabDados
     ExplicitWidth = 684
     ExplicitHeight = 405
     inherited TabDados: TTabSheet
