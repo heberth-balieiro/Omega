@@ -151,9 +151,7 @@ begin
 
     for I := 0 to ComponentCount do
     begin
-     // if Components[I] is TGroupBox then
-     //   TgroupBox(Components[I]).enabled  := True
-     // else
+     
       if Components[I] is TDBEdit then
         TDBEdit(Components[I]).ReadOnly  := False
       else

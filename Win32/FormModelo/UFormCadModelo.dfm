@@ -4,8 +4,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Formulario Padr'#227'o'
-  ClientHeight = 535
-  ClientWidth = 720
+  ClientHeight = 523
+  ClientWidth = 712
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,13 +22,11 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   object Page: TPageControl
     Left = 0
     Top = 0
-    Width = 720
-    Height = 479
+    Width = 712
+    Height = 467
     ActivePage = TabConsulta
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 712
-    ExplicitHeight = 467
     object TabDados: TTabSheet
       Caption = 'TabDados'
       TabVisible = False
@@ -50,12 +48,11 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       object Group_filtro: TGroupBox
         Left = 0
         Top = 0
-        Width = 712
+        Width = 704
         Height = 73
         Align = alTop
         Caption = 'Filtro'
         TabOrder = 0
-        ExplicitWidth = 704
         object Label1: TLabel
           Left = 8
           Top = 19
@@ -89,8 +86,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
       object DBGrid: TDBGrid
         Left = 0
         Top = 73
-        Width = 712
-        Height = 396
+        Width = 704
+        Height = 384
         Align = alClient
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgTitleClick, dgTitleHotTrack]
         ReadOnly = True
@@ -105,8 +102,8 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
   end
   object ToolBar1: TToolBar
     Left = 0
-    Top = 479
-    Width = 720
+    Top = 467
+    Width = 712
     Height = 56
     Align = alBottom
     ButtonHeight = 56
@@ -115,8 +112,6 @@ object Frm_ModeloPadrao: TFrm_ModeloPadrao
     Images = IMG
     ShowCaptions = True
     TabOrder = 1
-    ExplicitTop = 467
-    ExplicitWidth = 712
     object ToolButton8: TToolButton
       Left = 0
       Top = 0
