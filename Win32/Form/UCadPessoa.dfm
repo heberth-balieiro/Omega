@@ -8,7 +8,6 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
   inherited Page: TPageControl
     Width = 688
     Height = 406
-    ActivePage = TabDados
     ExplicitWidth = 680
     ExplicitHeight = 394
     inherited TabDados: TTabSheet
@@ -73,6 +72,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 39
           Width = 89
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'PES_ID'
           DataSource = ds
           ReadOnly = True
@@ -83,6 +83,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 39
           Width = 552
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'PES_NOME'
           DataSource = ds
           TabOrder = 1
@@ -109,6 +110,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 93
           Width = 241
           Height = 25
+          CharCase = ecLowerCase
           DataField = 'PES_EMAIL'
           DataSource = ds
           TabOrder = 5
@@ -119,6 +121,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 147
           Width = 126
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'PES_CELULAR'
           DataSource = ds
           TabOrder = 6
@@ -128,6 +131,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 93
           Width = 126
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'PES_CPF'
           DataSource = ds
           TabOrder = 2
@@ -137,6 +141,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 93
           Width = 117
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'PES_DATANASC'
           DataSource = ds
           TabOrder = 3

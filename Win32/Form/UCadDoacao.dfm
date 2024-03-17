@@ -2,8 +2,11 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
   Caption = 'Manuten'#231#227'o'
   TextHeight = 17
   inherited Page: TPageControl
+    ActivePage = TabDados
     inherited TabDados: TTabSheet
       inherited GroupBoxdados: TGroupBox
+        Width = 712
+        Height = 469
         object Label3: TLabel
           Left = 16
           Top = 16
@@ -37,6 +40,7 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
           Top = 39
           Width = 89
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'DOA_ID'
           DataSource = ds
           ReadOnly = True
@@ -47,6 +51,7 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
           Top = 39
           Width = 117
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'DOA_DATA'
           DataSource = ds
           TabOrder = 2
@@ -69,6 +74,7 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
           Top = 93
           Width = 89
           Height = 25
+          CharCase = ecUpperCase
           DataField = 'DOA_QTDE'
           DataSource = ds
           TabOrder = 3

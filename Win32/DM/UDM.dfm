@@ -1,7 +1,7 @@
 object DM: TDM
   OnCreate = DataModuleCreate
-  Height = 167
-  Width = 686
+  Height = 268
+  Width = 740
   object Connect: TSQLConnection
     DriverName = 'MSSQL'
     LoginPrompt = False
@@ -39,6 +39,7 @@ object DM: TDM
       'ErrorResourceFile='
       'OS Authentication=False'
       'Prepare SQL=False')
+    Connected = True
     Left = 24
     Top = 48
   end
@@ -227,5 +228,41 @@ object DM: TDM
     Params = <>
     SQLConnection = Connect
     Left = 432
+  end
+  object cds_RelDoacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_RelDoacao'
+    Left = 296
+    Top = 192
+    object cds_RelDoacaoquantidade: TFMTBCDField
+      FieldName = 'quantidade'
+      Precision = 32
+      Size = 2
+    end
+    object cds_RelDoacaoPES_TIPOSANG: TStringField
+      FieldName = 'PES_TIPOSANG'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+  end
+  object dsp_RelDoacao: TDataSetProvider
+    DataSet = sds_RelDoacao
+    Left = 216
+    Top = 192
+  end
+  object sds_RelDoacao: TSQLDataSet
+    SchemaName = 'sa'
+    CommandText = 
+      'Select '#13#10'    '#9'SUM(bd.DOA_QTDE) as quantidade, '#13#10'    '#9'BP.PES_TIPO' +
+      'SANG    '#9#13#10'    from '#13#10'    '#9'BS_DOACAO BD'#13#10'    join '#13#10'    '#9'BS_PESS' +
+      'OA BP'#13#10'    on bd.PES_ID = BP.PES_ID'#13#10'    Group by '#13#10'    '#9'bp.PES_' +
+      'TIPOSANG '#13#10'    order by '#13#10'    '#9'SUM(BD.doa_qtde) DESC'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Connect
+    Left = 136
+    Top = 192
   end
 end

@@ -39,6 +39,11 @@ type
     dsp_listPessoa: TDataSetProvider;
     sds_listPessoa: TSQLDataSet;
     cds_doacaoVIRTUAL_DATANASCIMENTO: TDateField;
+    cds_RelDoacao: TClientDataSet;
+    dsp_RelDoacao: TDataSetProvider;
+    sds_RelDoacao: TSQLDataSet;
+    cds_RelDoacaoquantidade: TFMTBCDField;
+    cds_RelDoacaoPES_TIPOSANG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     FDrivername: String;

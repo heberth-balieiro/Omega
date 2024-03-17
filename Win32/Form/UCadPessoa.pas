@@ -91,7 +91,7 @@ begin
   inherited;
 
       nome    := dm.cds_pessoapes_nome.AsString;
-      nasc    := dm.cds_pessoapes_datanasc.AsDateTime;
+
 
       if Length(nome) <=5 then
       begin
@@ -99,22 +99,27 @@ begin
         exit;
       end;
 
-      if dm.ValidarPessoa(nome,
-                          nasc
-                          ) then
+      if dm.cds_pessoa.State in [dsInsert] then
       begin
-        showmessage('Pessoa já cadastrado no sistema.');
-        exit;
+
+        if dm.ValidarPessoa(nome,
+                            nasc
+                            ) then
+        begin
+          showmessage('Pessoa já cadastrado no sistema.');
+          exit;
+        end;
+
+        nasc    := dm.cds_pessoapes_datanasc.AsDateTime;
+        idade := YearsBetween(Date, nasc);
+
+        if (idade < 18) or (idade > 60) then
+        begin
+          Showmessage('Idade da pessoa não está dentro dos limites.');
+          exit;
+        end;
+
       end;
-
-      idade := YearsBetween(Date, nasc);
-
-      if (idade < 18) or (idade > 60) then
-      begin
-        Showmessage('Idade da pessoa não está dentro dos limites.');
-        exit;
-      end;
-
       salvar();
       Pesquisa;
 end;
