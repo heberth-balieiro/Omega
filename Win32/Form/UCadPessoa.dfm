@@ -2,14 +2,15 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
   Caption = 'Cadastro de Pessoa'
   ClientHeight = 462
   ClientWidth = 688
-  ExplicitWidth = 700
-  ExplicitHeight = 500
+  ExplicitWidth = 696
+  ExplicitHeight = 489
   TextHeight = 17
   inherited Page: TPageControl
     Width = 688
     Height = 406
-    ExplicitWidth = 684
-    ExplicitHeight = 405
+    ActivePage = TabDados
+    ExplicitWidth = 680
+    ExplicitHeight = 394
     inherited TabDados: TTabSheet
       ExplicitWidth = 680
       ExplicitHeight = 396
@@ -44,7 +45,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
           Top = 70
           Width = 91
           Height = 17
-          Caption = 'Tipo Sanguineo'
+          Caption = 'Tipo Sangu'#237'neo'
         end
         object Label7: TLabel
           Left = 422
@@ -147,7 +148,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
       ExplicitHeight = 396
       inherited Group_filtro: TGroupBox
         Width = 680
-        ExplicitWidth = 676
+        ExplicitWidth = 672
         inherited EdtFiltro: TComboBox
           BevelInner = bvNone
           Style = csDropDownList
@@ -211,8 +212,8 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
   inherited ToolBar1: TToolBar
     Top = 406
     Width = 688
-    ExplicitTop = 405
-    ExplicitWidth = 684
+    ExplicitTop = 394
+    ExplicitWidth = 680
     inherited ToolButton11: TToolButton
       ImageIndex = 8
       Visible = False

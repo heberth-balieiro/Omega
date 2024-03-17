@@ -30,6 +30,7 @@ type
     procedure ActPessoaExecute(Sender: TObject);
     procedure ActDoacaoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ActRelDoacaoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,7 +44,7 @@ implementation
 
 {$R *.dfm}
 
-uses UCadPessoa, UCadDoacao;
+uses UCadPessoa, UCadDoacao, URelDoacao;
 
 procedure TFrmPrincipal.ActDoacaoExecute(Sender: TObject);
 begin
@@ -62,6 +63,16 @@ begin
     Frm_CadPessoa.showmodal;
   Finally
     Frm_CadPessoa.release;
+  End;
+end;
+
+procedure TFrmPrincipal.ActRelDoacaoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrm_RelDoacao, Frm_RelDoacao);
+  Try
+    Frm_RelDoacao.showmodal;
+  Finally
+    Frm_RelDoacao.release;
   End;
 end;
 

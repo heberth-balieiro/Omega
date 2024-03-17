@@ -131,14 +131,6 @@ object Frm_Configbanco: TFrm_Configbanco
         TabOrder = 3
         Text = ''
       end
-      object BitBtn1: TBitBtn
-        Left = 8
-        Top = 216
-        Width = 97
-        Height = 25
-        Caption = 'Testar Conex'#227'o'
-        TabOrder = 4
-      end
     end
   end
   object IMG: TcxImageList

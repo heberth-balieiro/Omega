@@ -12,3 +12,8 @@
 /DCUS
 /DCUS
 /Win32/Form/__history
+*.dcu
+*.~15~
+*.ini
+*.~16~
+*.~4~

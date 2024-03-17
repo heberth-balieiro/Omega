@@ -11,7 +11,9 @@ uses
   UFuncaoSql in '..\Win32\Units\UFuncaoSql.pas',
   UConfigbanco in '..\Win32\Form\UConfigbanco.pas' {Frm_Configbanco},
   UCadPessoa in '..\Win32\Form\UCadPessoa.pas' {Frm_CadPessoa},
-  UCadDoacao in '..\Win32\Form\UCadDoacao.pas' {Frm_CadManutencao};
+  UCadDoacao in '..\Win32\Form\UCadDoacao.pas' {Frm_CadManutencao},
+  UFormRelModelo in '..\Win32\FormModelo\UFormRelModelo.pas' {Frm_RelModeloPadrao},
+  URelDoacao in '..\Win32\Form\URelDoacao.pas' {Frm_RelDoacao};
 
 {$R *.res}
 

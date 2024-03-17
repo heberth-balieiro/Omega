@@ -28,7 +28,6 @@ type
     edtUsuario: TEdit;
     Label4: TLabel;
     edtSenha: TMaskEdit;
-    BitBtn1: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure a_fecharExecute(Sender: TObject);
     procedure a_salvarExecute(Sender: TObject);

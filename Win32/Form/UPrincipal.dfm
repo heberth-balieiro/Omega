@@ -8344,8 +8344,8 @@ object FrmPrincipal: TFrmPrincipal
       item
         Width = 50
       end>
-    ExplicitTop = 466
-    ExplicitWidth = 795
+    ExplicitTop = 592
+    ExplicitWidth = 897
   end
   object Menu: TMainMenu
     Left = 16
@@ -8396,6 +8396,7 @@ object FrmPrincipal: TFrmPrincipal
     object ActRelDoacao: TAction
       Category = 'Relat'#243'rio'
       Caption = 'Doa'#231#227'o'
+      OnExecute = ActRelDoacaoExecute
     end
   end
 end
