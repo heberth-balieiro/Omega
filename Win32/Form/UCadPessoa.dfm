@@ -16,8 +16,8 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
       inherited GroupBoxdados: TGroupBox
         Width = 680
         Height = 396
-        ExplicitWidth = 676
-        ExplicitHeight = 395
+        ExplicitWidth = 680
+        ExplicitHeight = 396
         object Label3: TLabel
           Left = 16
           Top = 16
@@ -147,7 +147,7 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
       ExplicitHeight = 396
       inherited Group_filtro: TGroupBox
         Width = 680
-        ExplicitWidth = 680
+        ExplicitWidth = 676
         inherited EdtFiltro: TComboBox
           BevelInner = bvNone
           Style = csDropDownList
@@ -213,12 +213,17 @@ inherited Frm_CadPessoa: TFrm_CadPessoa
     Width = 688
     ExplicitTop = 405
     ExplicitWidth = 684
+    inherited ToolButton11: TToolButton
+      ImageIndex = 8
+      Visible = False
+    end
   end
   inherited IMG: TcxImageList
     FormatVersion = 1
   end
   inherited cds_cons: TClientDataSet
     ProviderName = 'dsp_Cons'
+    Top = 356
     object cds_consPES_ID: TIntegerField
       FieldName = 'PES_ID'
       Required = True

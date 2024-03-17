@@ -51,6 +51,8 @@ type
     Sql_Cons: TSQLDataSet;
     ds: TDataSource;
     GroupBoxdados: TGroupBox;
+    ToolButton11: TToolButton;
+    A_anular: TAction;
     procedure a_salvarUpdate(Sender: TObject);
     procedure A_novoUpdate(Sender: TObject);
     procedure A_editarExecute(Sender: TObject);

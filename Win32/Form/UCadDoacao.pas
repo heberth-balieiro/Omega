@@ -27,8 +27,6 @@ type
     cds_consDOA_STATUS: TStringField;
     cds_consPES_ID: TIntegerField;
     cds_consnnome: TStringField;
-    ToolButton11: TToolButton;
-    A_estornar: TAction;
     cds_consnstatus: TStringField;
     edtanulada: TCheckBox;
     procedure A_novoExecute(Sender: TObject);
@@ -38,8 +36,8 @@ type
     procedure EdtPesquisaChange(Sender: TObject);
     procedure a_excluirExecute(Sender: TObject);
     procedure A_editarExecute(Sender: TObject);
-    procedure A_estornarExecute(Sender: TObject);
     procedure edtanuladaClick(Sender: TObject);
+    procedure A_anularExecute(Sender: TObject);
   private
     procedure Pesquisa;
     { Private declarations }
@@ -56,21 +54,7 @@ implementation
 
 uses UDM;
 
-procedure TFrm_CadManutencao.A_editarExecute(Sender: TObject);
-begin
-  inherited;
-
-  if cds_consdoa_status.AsString <>'C' then
-  begin
-    Showmessage('Registro não pode ser editado.');
-    exit;
-  end;
-
-  editar();
-  Pesquisa;
-end;
-
-procedure TFrm_CadManutencao.A_estornarExecute(Sender: TObject);
+procedure TFrm_CadManutencao.A_anularExecute(Sender: TObject);
 begin
   inherited;
   if cds_consdoa_status.AsString='A' then
@@ -84,6 +68,20 @@ begin
     if Dm.AnularDoacao(cds_consdoa_id.AsInteger) then
     pesquisa;
   end;
+end;
+
+procedure TFrm_CadManutencao.A_editarExecute(Sender: TObject);
+begin
+  inherited;
+
+  if cds_consdoa_status.AsString <>'C' then
+  begin
+    Showmessage('Registro não pode ser editado.');
+    exit;
+  end;
+
+  editar();
+  Pesquisa;
 end;
 
 procedure TFrm_CadManutencao.a_excluirExecute(Sender: TObject);

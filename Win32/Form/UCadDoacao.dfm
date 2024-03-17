@@ -142,45 +142,12 @@ inherited Frm_CadManutencao: TFrm_CadManutencao
       end
     end
   end
-  inherited ToolBar1: TToolBar
-    object ToolButton11: TToolButton [4]
-      Left = 219
-      Top = 0
-      Action = A_estornar
-    end
-    inherited ToolButton9: TToolButton
-      Left = 301
-      ExplicitLeft = 301
-    end
-    inherited ToolButton1: TToolButton
-      Left = 309
-      ExplicitLeft = 309
-    end
-    inherited ToolButton10: TToolButton
-      Left = 395
-      ExplicitLeft = 395
-    end
-    inherited ToolButton5: TToolButton
-      Left = 403
-      ExplicitLeft = 403
-    end
-    inherited ToolButton6: TToolButton
-      Left = 489
-      ExplicitLeft = 489
-    end
-    inherited ToolButton7: TToolButton
-      Left = 567
-      ExplicitLeft = 567
-    end
-  end
   inherited IMG: TcxImageList
     FormatVersion = 1
   end
   inherited Menu: TActionList
-    object A_estornar: TAction
-      Category = 'Menu'
-      Caption = 'Estornar'
-      OnExecute = A_estornarExecute
+    inherited A_anular: TAction
+      OnExecute = A_anularExecute
     end
   end
   inherited cds_cons: TClientDataSet
