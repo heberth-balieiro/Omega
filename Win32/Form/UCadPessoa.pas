@@ -96,6 +96,7 @@ begin
       if Length(nome) <=5 then
       begin
         Showmessage('O Campo nome deve conter mais de 5 caracteres.');
+        edtNome.SetFocus;
         exit;
       end;
 
