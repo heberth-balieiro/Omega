@@ -1,0 +1,42 @@
+object DM: TDM
+  OnCreate = DataModuleCreate
+  Height = 167
+  Width = 686
+  object Connect: TSQLConnection
+    ConnectionName = 'MSSQLConnection'
+    DriverName = 'MSSQL'
+    LoginPrompt = False
+    Params.Strings = (
+      'SchemaOverride=sa.dbo'
+      'DriverName=MSSQL'
+      'HostName=192.168.130.12\alphasoftware'
+      'DataBase=dados'
+      'User_Name=sa'
+      'Password=@112658n'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'OS Authentication=False'
+      'Prepare SQL=False'
+      'ConnectTimeout=60'
+      'Mars_Connection=False')
+    Left = 128
+    Top = 40
+  end
+  object SQLConnection1: TSQLConnection
+    ConnectionName = 'OdbcConnection'
+    DriverName = 'Odbc'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=Odbc'
+      'DataBase=dados'
+      'User_Name=sa'
+      'Password=@112658n'
+      'IsolationLevel=ReadCommitted'
+      'RowSetSize=20'
+      'ConnectionString=SQL')
+    Left = 216
+    Top = 88
+  end
+end

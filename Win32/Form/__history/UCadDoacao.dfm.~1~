@@ -1,0 +1,14 @@
+inherited Frm_ModeloPadrao1: TFrm_ModeloPadrao1
+  Caption = 'Frm_ModeloPadrao1'
+  TextHeight = 17
+  inherited Page: TPageControl
+    inherited TabConsulta: TTabSheet
+      inherited Group_filtro: TGroupBox
+        ExplicitWidth = 704
+      end
+    end
+  end
+  inherited IMG: TcxImageList
+    FormatVersion = 1
+  end
+end

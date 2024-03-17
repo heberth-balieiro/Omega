@@ -1,0 +1,94 @@
+object DM: TDM
+  OnCreate = DataModuleCreate
+  Height = 167
+  Width = 686
+  object Connect: TSQLConnection
+    DriverName = 'MSSQL'
+    LoginPrompt = False
+    Params.Strings = (
+      'SchemaOverride=%.dbo'
+      'DriverUnit=Data.DBXMSSQL'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver280.' +
+        'bpl'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
+        'eyToken=91d62ebb5b0d1b1b'
+      
+        'MetaDataPackageLoader=TDBXMsSqlMetaDataCommandFactory,DbxMSSQLDr' +
+        'iver280.bpl'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXMsSqlMetaDataCommandFact' +
+        'ory,Borland.Data.DbxMSSQLDriver,Version=24.0.0.0,Culture=neutral' +
+        ',PublicKeyToken=91d62ebb5b0d1b1b'
+      'GetDriverFunc=getSQLDriverMSSQL'
+      'LibraryName=dbxmss.dll'
+      'VendorLib=sqlncli10.dll'
+      'VendorLibWin64=sqlncli10.dll'
+      'HostName=localhost\sqlexpress'
+      'DataBase=dados'
+      'MaxBlobSize=-1'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'OSAuthentication=False'
+      'PrepareSQL=True'
+      'User_Name=sa'
+      'Password=hd860412'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'OS Authentication=False'
+      'Prepare SQL=False')
+    Connected = True
+    Left = 24
+    Top = 48
+  end
+  object cds_pessoa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dsp_pessoa'
+    Left = 280
+    object cds_pessoaPES_ID: TIntegerField
+      FieldName = 'PES_ID'
+      Required = True
+    end
+    object cds_pessoaPES_NOME: TStringField
+      FieldName = 'PES_NOME'
+      Required = True
+      Size = 100
+    end
+    object cds_pessoaPES_DATANASC: TSQLTimeStampField
+      FieldName = 'PES_DATANASC'
+    end
+    object cds_pessoaPES_TIPOSANG: TStringField
+      FieldName = 'PES_TIPOSANG'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object cds_pessoaPES_EMAIL: TStringField
+      FieldName = 'PES_EMAIL'
+      Size = 100
+    end
+    object cds_pessoaPES_CELULAR: TStringField
+      FieldName = 'PES_CELULAR'
+      Size = 100
+    end
+    object cds_pessoaPES_CPF: TStringField
+      FieldName = 'PES_CPF'
+      Size = 100
+    end
+  end
+  object dsp_pessoa: TDataSetProvider
+    DataSet = sds_pessoa
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 216
+  end
+  object sds_pessoa: TSQLDataSet
+    CommandText = 'Select * from bs_pessoa'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = Connect
+    Left = 152
+  end
+end

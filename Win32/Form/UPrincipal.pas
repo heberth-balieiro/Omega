@@ -25,6 +25,8 @@ type
     ActDoacao: TAction;
     ActRelDoacao: TAction;
     procedure ActSairExecute(Sender: TObject);
+    procedure ActPessoaExecute(Sender: TObject);
+    procedure ActDoacaoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,6 +39,28 @@ var
 implementation
 
 {$R *.dfm}
+
+uses UCadPessoa, UCadDoacao;
+
+procedure TFrmPrincipal.ActDoacaoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrm_CadManutencao, Frm_CadManutencao);
+  Try
+    Frm_CadManutencao.showmodal;
+  Finally
+    Frm_CadManutencao.release;
+  End;
+end;
+
+procedure TFrmPrincipal.ActPessoaExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFrm_CadPessoa, Frm_CadPessoa);
+  Try
+    Frm_CadPessoa.showmodal;
+  Finally
+    Frm_CadPessoa.release;
+  End;
+end;
 
 procedure TFrmPrincipal.ActSairExecute(Sender: TObject);
 begin

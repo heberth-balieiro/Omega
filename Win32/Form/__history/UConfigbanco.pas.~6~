@@ -1,0 +1,49 @@
+unit UConfigbanco;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Actions, Vcl.ActnList,
+  System.ImageList, Vcl.ImgList, cxImageList, cxGraphics, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.ToolWin, Vcl.Mask;
+
+type
+  TFrm_Configbanco = class(TForm)
+    IMG: TcxImageList;
+    Menu: TActionList;
+    A_novo: TAction;
+    A_editar: TAction;
+    a_excluir: TAction;
+    a_consulta: TAction;
+    a_cancelar: TAction;
+    a_salvar: TAction;
+    a_fechar: TAction;
+    ToolBar1: TToolBar;
+    ToolButton8: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    edtServer: TEdit;
+    Label2: TLabel;
+    edtBase: TEdit;
+    Label3: TLabel;
+    edtUsuario: TEdit;
+    Label4: TLabel;
+    edtSenha: TMaskEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_Configbanco: TFrm_Configbanco;
+
+implementation
+
+{$R *.dfm}
+
+end.

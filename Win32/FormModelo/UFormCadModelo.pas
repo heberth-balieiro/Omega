@@ -8,7 +8,11 @@ uses
   Data.SqlExpr, Datasnap.Provider, Datasnap.DBClient, Vcl.Grids, Vcl.DBGrids,
   Vcl.StdCtrls, Vcl.ToolWin, System.Actions, Vcl.ActnList, System.ImageList,
   Vcl.ImgList, cxImageList, cxGraphics,
-  UAcaoForm;
+  UAcaoForm,
+  UException,
+  UFuncaoSql,
+  uTratarerror,
+  Vcl.Mask, Vcl.ExtCtrls, Vcl.DBCtrls,DateUtils;
 
 type
   TFrm_ModeloPadrao = class(TForm)
@@ -46,6 +50,7 @@ type
     dsp_Cons: TDataSetProvider;
     Sql_Cons: TSQLDataSet;
     ds: TDataSource;
+    GroupBoxdados: TGroupBox;
     procedure a_salvarUpdate(Sender: TObject);
     procedure A_novoUpdate(Sender: TObject);
     procedure A_editarExecute(Sender: TObject);
@@ -59,7 +64,9 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
+    procedure EdtPesquisaExit(Sender: TObject);
   private
+    procedure CamposObrigatorios;
 
 
   Protected
@@ -72,9 +79,10 @@ type
     Procedure Excluir; virtual;
     Procedure Consultar; virtual;
     Procedure Cancelar; virtual;
-    Procedure Pesquisa; virtual;
+
     Procedure Salvar; virtual;
     Procedure Campos(Acoes:Boolean);
+
     { Public declarations }
   end;
 
@@ -84,6 +92,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses UDM;
 
 
 procedure TFrm_ModeloPadrao.a_cancelarExecute(Sender: TObject);
@@ -132,7 +142,64 @@ begin
 end;
 
 procedure TFrm_ModeloPadrao.Campos(Acoes: Boolean);
+var
+I:integer;
 begin
+  if Acoes then
+  begin
+
+    for I := 0 to ComponentCount do
+    begin
+     // if Components[I] is TGroupBox then
+     //   TgroupBox(Components[I]).enabled  := True
+     // else
+      if Components[I] is TDBEdit then
+        TDBEdit(Components[I]).ReadOnly  := False
+      else
+      if Components[I] is TDBCombobox then
+      TDBCombobox(Components[I]).ReadOnly  := False
+      else
+      if Components[I] is TDBgrid then
+      TDBgrid(Components[I]).ReadOnly  := False;
+
+    end;
+
+  end
+  else
+  begin
+    if Components[I] is TGroupBox then
+        TgroupBox(Components[I]).enabled  := False
+      else
+      if Components[I] is TDBEdit then
+        TDBEdit(Components[I]).ReadOnly  := True
+      else
+      if Components[I] is TDBCombobox then
+      TDBCombobox(Components[I]).ReadOnly  := True
+      else
+      if Components[I] is TDBgrid then
+      TDBgrid(Components[I]).ReadOnly  := True;
+  end;
+end;
+
+
+procedure TFrm_ModeloPadrao.CamposObrigatorios;
+var
+I:integer;
+begin
+
+  for I := 0 to ds.DataSet.FieldCount -1 do
+  begin
+    if (ds.DataSet.Fields[I].Required) then
+    begin
+      if (ds.DataSet.Fields[I].IsNull) or (ds.DataSet.Fields[I].AsString = EmptyStr) then
+      begin
+        ds.DataSet.Fields[I].FocusControl;
+        raise EerrorCampoObrigatorio.Create('Campo |'+
+                                    ds.DataSet.Fields[I].DisplayLabel +
+                                    '| Obrigatório.');
+      end;
+    end;
+  end;
 
 end;
 
@@ -149,9 +216,13 @@ begin
 
 end;
 
+
 procedure TFrm_ModeloPadrao.Consultar;
 begin
-
+  if page.ActivePage = Tabconsulta then
+  page.ActivePage := TabDados
+  else
+  page.ActivePage := Tabconsulta;
 end;
 
 procedure TFrm_ModeloPadrao.Editar;
@@ -162,13 +233,13 @@ begin
   Try
 
     Self.FRegistro  := TClientdataset(ds_cons.DataSet).GetBookmark;
-    Self.Campos(True);
+
 
     if not ds_cons.DataSet.IsEmpty then
     begin
 
       ds.DataSet.Close;
-      TClientDataset(ds.DataSet).Params[0].AsInteger  := ds_cons.DataSet.Fields[0].AsInteger;
+      TClientDataSet(ds.DataSet).Params[0].AsInteger  := ds_cons.DataSet.Fields[0].AsInteger;
       ds.DataSet.Open;
 
       if assigned(self.DBGrid) then
@@ -188,28 +259,47 @@ begin
 
 end;
 
+procedure TFrm_ModeloPadrao.EdtPesquisaExit(Sender: TObject);
+begin
+  if not ds_cons.DataSet.IsEmpty then
+  begin
+    if assigned(Self.DBGrid) then
+    self.DBGrid.SetFocus;
+  end;
+end;
+
 procedure TFrm_ModeloPadrao.Excluir;
 begin
   Self.FAcao    := UAcaoForm.AcExcluir;
 
   Try
-    ds.DataSet.Close;
-    TClientDataset(ds.DataSet).Params[0].AsInteger  := ds_cons.DataSet.Fields[0].AsInteger;
-    ds.DataSet.Open;
-
-    ds_cons.DataSet.Close;
-
-    if Application.MessageBox(PChar('Deseja Excluir o registro selecionado?'), 'Confirmação',
-       MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION) = mrYes then
+    if not ds_cons.DataSet.IsEmpty then
     begin
-      ds.DataSet.Delete;
+      ds.DataSet.Close;
+      TClientDataset(ds.DataSet).Params[0].AsInteger  := ds_cons.DataSet.Fields[0].AsInteger;
+      ds.DataSet.Open;
 
-      if Tclientdataset(ds.DataSet).ApplyUpdates(0)  > 0 then
-      raise FreeOnRelease
+      if Application.MessageBox(PChar('Deseja Excluir o registro selecionado?'), 'Confirmação',
+         MB_YESNO + MB_DEFBUTTON2 + MB_ICONQUESTION) = mrYes then
+      begin
+        ds.DataSet.Delete;
+
+        if Tclientdataset(ds.DataSet).ApplyUpdates(0)  > 0 then
+        raise ErrorOnreconcile.Create(TTratarError.getMensagemerroaplyupdate());
+
+        self.EdtPesquisa.Clear;
+        self.EdtPesquisa.SetFocus;
+        ds.DataSet.Close;
+
+      end;
+
     end;
 
   except on e:exception do
-    raise Exception.Create('Erro:'+#13+e.Message);
+    begin
+      ds.DataSet.Close;
+      Application.MessageBox(PChar(E.Message), PChar('Erro'), MB_OK + MB_ICONINFORMATION);
+    end;
   End;
 
 end;
@@ -219,6 +309,10 @@ procedure TFrm_ModeloPadrao.FormClose(Sender: TObject;
 begin
   if ds.DataSet.Active then
   ds.DataSet.Close;
+
+  if ds_cons.DataSet.Active then
+  ds_cons.DataSet.Close;
+
 
   frm_modeloPadrao:= nil;
 end;
@@ -243,23 +337,112 @@ end;
 
 procedure TFrm_ModeloPadrao.FormShow(Sender: TObject);
 begin
-  page.ActivePage   := TabConsulta;
+
+  page.ActivePage       := TabConsulta;
   edtpesquisa.SetFocus;
 
 end;
 
 procedure TFrm_ModeloPadrao.Novo;
 begin
+  Try
+    Self.FAcao    := TAcaoForm.AcNovo;
 
-end;
+    if not ds.DataSet.Active then
+    begin
+      Tclientdataset(ds.DataSet).FetchParams;
 
-procedure TFrm_ModeloPadrao.Pesquisa;
-begin
+      ds.DataSet.Close;
+      TClientdataset(ds.DataSet).Params[0].AsInteger    :=-1;
+      ds.DataSet.Open;
+
+    end;
+
+    ds.DataSet.Append();
+
+    page.ActivePage     := tabdados;
+
+
+    if assigned(self.FComponente) then
+    self.FComponente.SetFocus();
+
+
+  except on e:exception do
+    Application.MessageBox(PChar(E.Message), PChar('Erro'), MB_OK + MB_ICONINFORMATION);
+  End;
 
 end;
 
 procedure TFrm_ModeloPadrao.Salvar;
+var
+Nome:string;
+nasc:TDateTime;
+Idade:integer;
 begin
+  Try
+    if FAcao <> UAcaoForm.AcConsulta then
+    begin
+      CamposObrigatorios();
+
+
+      nome    := TClientDataSet(ds.DataSet).FieldByName('pes_nome').AsString;
+      nasc    := TClientDataSet(ds.DataSet).FieldByName('pes_datanasc').AsDateTime;
+
+      if Length(nome) <=5 then
+      begin
+        Showmessage('O Campo nome deve conter mais de 5 caracteres.');
+        exit;
+      end;
+
+      if dm.ValidarPessoa(TClientDataSet(ds.DataSet).FieldByName('pes_nome').AsString,
+                TClientDataSet(ds.DataSet).FieldByName('pes_datanasc').AsDateTime
+                ) then
+      begin
+        showmessage('Pessoa já cadastrado no sistema.');
+        exit;
+      end;
+
+      idade := YearsBetween(Date, nasc);
+
+      if (idade < 18) or (idade > 60) then
+      begin
+        Showmessage('Idade da pessoa não está dentro dos limites.');
+        exit;
+      end;
+
+      TClientdataset(ds.DataSet).post;
+
+      if TClientDataSet(ds.DataSet).ApplyUpdates(0) > 0 then
+      raise ErrorOnreconcile.Create(TTratarError.getMensagemerroaplyupdate());
+
+      page.ActivePage := TabConsulta;
+
+      if assigned(self.DBGrid) then
+      self.DBGrid.SetFocus;
+
+    end
+    else
+    begin
+      page.ActivePage   := TabConsulta;
+
+      if Assigned(self.DBGrid) then
+      self.DBGrid.SetFocus;
+
+    end;
+
+  except on e:EerrorCampoObrigatorio do
+    begin
+      Application.MessageBox(PChar(E.Message), PChar('Validação'), MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+    on e:exception do
+    begin
+      Application.MessageBox(PChar(E.Message), PChar('Erro'), MB_OK + MB_ICONINFORMATION);
+      Exit;
+    end;
+
+  End;
 
 end;
 

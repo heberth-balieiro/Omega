@@ -1,0 +1,17 @@
+unit UFuncaoSql;
+
+interface
+
+uses
+  windows, Forms, Controls, SysUtils, SqlExpr, DBGrids, Grids, Graphics, ComCtrls, Classes;
+
+type
+  TFuncaoSql = class
+    public
+      class procedure CorGrid(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState; Color: TColor);
+    class function MontarSql(objeto: TObject) : String; overload;
+  end;
+implementation
+
+end.

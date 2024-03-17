@@ -1,0 +1,41 @@
+unit UCadDoacao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UFormCadModelo, Data.DB, Data.FMTBcd,
+  Data.SqlExpr, Datasnap.Provider, Datasnap.DBClient, System.Actions,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, cxImageList, cxGraphics,
+  Vcl.ComCtrls, Vcl.ToolWin, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Vcl.DBCtrls;
+
+type
+  TFrm_CadManutencao = class(TFrm_ModeloPadrao)
+    Label3: TLabel;
+    edtCodigo: TDBEdit;
+    Label4: TLabel;
+    edtNascimento: TDBEdit;
+    edtpessoa: TDBLookupComboBox;
+    Label5: TLabel;
+    DBEdit1: TDBEdit;
+    Label6: TLabel;
+    edtTipo: TDBComboBox;
+    Label7: TLabel;
+    dsPessoa: TDataSource;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Frm_CadManutencao: TFrm_CadManutencao;
+
+implementation
+
+{$R *.dfm}
+
+uses UDM;
+
+end.
